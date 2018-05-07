@@ -6,8 +6,13 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const keys = require("./config/keys");
 const passport = require("passport");
+const flash = require("connect-flash");
 
 require("./models/User");
+require("./models/Order");
+require("./models/Review");
+require("./models/Product");
+require("./models/Cart");
 require("./services/passport");
 
 mongoose.connect(keys.mongoURI, () => {
@@ -32,34 +37,13 @@ app.use(
   })
 );
 
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
+require("./routes/authRoutes")(app);
+require("./routes/billingRoutes")(app);
 
-app.get("/", (req, res) => {
-    if(!req.session.test){
-        req.session.test = "OK";
-    }
-    res.send("OK")
-});
-
-app.get("/test", (req, res)=>{
-    console.log("session ", req.session.test)
-    res.send(req.session.test);
-});
-
-app.post("/api/signup", passport.authenticate("local.signup", {
-  failureRedirect:"/api/signup",
-  failureFlash: true
-}),(req, res)=>{
-  console.log("server ", req.session)
-  res.send(req.body)
-})
-
-app.get("/api/current_user", (req, res)=>{
-  console.log("USER",req.user)
-  res.send(req.user)
-})
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

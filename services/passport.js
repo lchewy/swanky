@@ -22,17 +22,18 @@ passport.use(
       proxy: true
     },
     async (req, email, password, done) => {
-      try{
-        const existingUser = await User.findOne({email});
-        if(existingUser){
-          return done(null, false); // Should say email is already in use
+      try {
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+          console.log("herererere")
+          return done(null, false, {message: "email is already in use"});
         }
-      }catch(err){
+      } catch (err) {
+        console.log("errrrrrr")
         return done(err);
       }
 
-      
-      try{
+      try {
         let newUser = await new User({
           fname: req.body.fname,
           lname: req.body.lname,
@@ -40,11 +41,39 @@ passport.use(
         });
         newUser.password = newUser.encryptPassword(password);
         newUser = await newUser.save();
-
-      }catch(err){
+        console.log("tryadfadf")
+        done(null, newUser);
+      } catch (err) {
         return done(err);
       }
+    }
+  )
+);
 
+passport.use(
+  "local.signin",
+  new localStrategy(
+    {
+      usernameField: "email",
+      passwordField: "password",
+      passReqToCallback: true,
+      proxy: true
+    },
+    async (req, email, password, done) => {
+      try {
+        const foundUser = await User.findOne({ email });
+        if (!foundUser) {
+          return done(null, false, { message: "email not found" });
+        }
+
+        if (!foundUser.validPassword(password)) {
+          return done(null, false, { message: "password is incorrect" });
+        }
+
+        return done(null, foundUser);
+      } catch (err) {
+        return done(err);
+      }
     }
   )
 );
