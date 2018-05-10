@@ -42,5 +42,17 @@ module.exports = app => {
     res.redirect("/shopping-cart");
   });
 
+  app.get("/api/shopping-cart", (req, res) => {
+    if (!req.session.cart) {
+      res.send({});
+    }
+
+    const cart = new Cart(req.session.cart);
+    res.send({
+      products: cart.generateArray(),
+      totalPrice: cart.totalPrice
+    });
+  });
+
   
 };
