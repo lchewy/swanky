@@ -19,7 +19,7 @@ class Header extends Component {
       default:
         return [
           <li className="user-nav__item" key="1">
-            <Link to="/profile">Profile</Link>
+            <Link className="user-nav__item--profile" to="/profile">Profile</Link>
           </li>,
           <li className="user-nav__item" key="2">
             <div className="user-nav__dropdown">
