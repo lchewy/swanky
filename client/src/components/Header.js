@@ -1,45 +1,37 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import Signup from "./user/Signup";
+import authNav from "./authNav";
 
-const auth = true;
 class Header extends Component {
+  state = { showModal: false };
+
   renderUserNav() {
+    const { showModal } = this.state;
+    const { auth } = this.props;
+
     switch (auth) {
       case null:
         return;
       case false:
         return [
           <li className="user-nav__item" key="1">
-            <Link to="/api/signin">Log In</Link>
+            <button onClick={() => this.setState({ showModal: true })}>
+              Sign Up
+            </button>
+            {showModal && (
+              <Signup closeModal={() => this.setState({ showModal: false })} />
+            )}
           </li>,
           <li className="user-nav__item" key="2">
-            <Link to="/api/signup">Sign Up</Link>
+            <Link className="user-nav__item--link" to="/api/signup">
+              Log In
+            </Link>
           </li>
         ];
       default:
-        return [
-          <li className="user-nav__item" key="1">
-            <Link className="user-nav__item--profile" to="/profile">Profile</Link>
-          </li>,
-          <li className="user-nav__item" key="2">
-            <div className="user-nav__dropdown">
-              <button className="user-nav__dropbtn">
-                <i className="far fa-user" />
-              </button>
-              <div className="user-nav__dropdown-content">
-                <Link className="user-nav__dropdown-content--link" to="/">
-                  USER
-                </Link>
-                <Link className="user-nav__dropdown-content--link" to="/">
-                  Purchase History
-                </Link>
-                <Link className="user-nav__dropdown-content--link" to="/">
-                  Logout
-                </Link>
-              </div>
-            </div>
-          </li>
-        ];
+        return authNav;
     }
   }
 
@@ -69,5 +61,34 @@ class Header extends Component {
     );
   }
 }
+const mstp = ({ auth }) => {
+  return { auth };
+};
 
-export default Header;
+export default connect(mstp)(Header);
+
+// [
+//   <li className="user-nav__item" key="1">
+//     <Link className="user-nav__item--profile" to="/profile">
+//       Profile
+//     </Link>
+//   </li>,
+//   <li className="user-nav__item" key="2">
+//     <div className="user-nav__dropdown">
+//       <button className="user-nav__dropbtn">
+//         <i className="far fa-user" />
+//       </button>
+//       <div className="user-nav__dropdown-content">
+//         <Link className="user-nav__dropdown-content--link" to="/">
+//           USER
+//         </Link>
+//         <Link className="user-nav__dropdown-content--link" to="/">
+//           Purchase History
+//         </Link>
+//         <Link className="user-nav__dropdown-content--link" to="/">
+//           Logout
+//         </Link>
+//       </div>
+//     </div>
+//   </li>
+// ];

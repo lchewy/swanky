@@ -1,11 +1,13 @@
 .logo{
     margin-left: 2rem;
+    text-decoration: none;
 }
 
 
 .user-nav{
     display: flex;
     align-items: center;
+    
 
     & > * {
         padding: 0 2rem;
@@ -27,9 +29,6 @@
             min-width: 160px;
             right: 1rem;
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-//             -webkit-clip-path: polygon(79% 11%, 90% 0, 100% 11%, 100% 100%, 70% 100%, 30% 100%, 1% 100%, 0 11%);
-// clip-path: polygon(79% 11%, 90% 0, 100% 11%, 100% 100%, 70% 100%, 30% 100%, 1% 100%, 0 11%);
-//             z-index: 1;
 
             &--link{
                 color: black;
@@ -55,11 +54,16 @@
 
     &__icon-box{
         position: relative;
-        // font-size: 20rem;
+        font-size: 2rem;
     }
 
     &__item{
         list-style: none;
         display: inline-block;
+
+        &--link{
+            margin-left: 2rem;
+            text-decoration: none;
+        }
     }
 }
