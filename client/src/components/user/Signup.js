@@ -1,11 +1,12 @@
 import React from "react";
 import Modal from "../Modal";
+import {reduxForm} from "redux-form";
 
-const Signin = props => {
-  const { closeModal } = props;
+const Signup = ({closeModal}) => {
+  // const { closeModal } = props;
   return (
     <Modal>
-      <button onClick={() => closeModal()}>Close Modal</button>
+      <button onClick={closeModal}>Close Modal</button>
       <form>
         <h1>Sign Up</h1>
         <label htmlFor="fname">
@@ -29,4 +30,4 @@ const Signin = props => {
   );
 };
 
-export default Signin;
+export default reduxForm({form:"signUpForm"})(Signup);

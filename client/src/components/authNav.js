@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import Signup from "./user/Signup";
 
 export default [
   <li className="user-nav__item" key="1">

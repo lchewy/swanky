@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import Signup from "./user/Signup";
 import authNav from "./authNav";
+import NoAuthNav from "./noAuthNav";
 
 class Header extends Component {
   state = { showModal: false };
@@ -15,21 +15,13 @@ class Header extends Component {
       case null:
         return;
       case false:
-        return [
-          <li className="user-nav__item" key="1">
-            <button onClick={() => this.setState({ showModal: true })}>
-              Sign Up
-            </button>
-            {showModal && (
-              <Signup closeModal={() => this.setState({ showModal: false })} />
-            )}
-          </li>,
-          <li className="user-nav__item" key="2">
-            <Link className="user-nav__item--link" to="/api/signup">
-              Log In
-            </Link>
-          </li>
-        ];
+        return (
+          <NoAuthNav
+            openModal={() => this.setState({ showModal: true })}
+            closeModal={() => this.setState({ showModal: false })}
+            showModal={showModal}
+          />
+        );
       default:
         return authNav;
     }
@@ -66,6 +58,22 @@ const mstp = ({ auth }) => {
 };
 
 export default connect(mstp)(Header);
+
+// return [
+//   <li className="user-nav__item" key="1">
+//     <button onClick={() => this.setState({ showModal: true })}>
+//       Sign Up
+//     </button>
+//     {showModal && (
+//       <Signup closeModal={() => this.setState({ showModal: false })} />
+//     )}
+//   </li>,
+//   <li className="user-nav__item" key="2">
+//     <Link className="user-nav__item--link" to="/api/signup">
+//       Log In
+//     </Link>
+//   </li>
+// ];
 
 // [
 //   <li className="user-nav__item" key="1">
