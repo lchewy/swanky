@@ -15,5 +15,8 @@ export const submitSignup = (values, history) => async dispatch => {
 
 export const fetchToken = () => async dispatch => {
   const res = await axios.get("/api/signup");
+  // console.log("fetch token", res.data)
   dispatch({ type: FETCH_TOKEN, payload: res.data });
 };
+
+

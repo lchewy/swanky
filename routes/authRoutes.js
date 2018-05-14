@@ -22,13 +22,15 @@ module.exports = app => {
     }
   });
 
-  app.get("/api/logout", requireLogin, (req, res) => {
+  app.get("/api/logout", (req, res) => {
+    console.log("here i am")
     req.logout();
     res.redirect("/");
   });
 
   app.get("/api/signup", csrfProtection, (req, res) => {
     const messages = req.flash("error");
+    // console.log("server ", messages)
     res.send({
       csrfToken: req.csrfToken(),
       messages
@@ -38,12 +40,14 @@ module.exports = app => {
   app.post(
     "/api/signup",
     passport.authenticate("local.signup", {
-      // failureRedirect: "/api/signup",
       failureFlash: true
     }),
     (req, res) => {
       // console.log("server ", req.authInfo);
-      res.send(req.body); 
+      const messages = req.flash("error");
+    req.user.message = messages[0]
+    console.log("server ", req.user)
+      res.send(req.user); 
     }
   );
 
@@ -62,7 +66,7 @@ module.exports = app => {
       failureFlash: true
     }),
     (req, res, next) => {
-      res.send(req.body);
+      res.send(req.user);
     }
   );
 

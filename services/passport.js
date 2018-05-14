@@ -39,7 +39,6 @@ passport.use(
         });
         newUser.password = newUser.encryptPassword(password);
         newUser = await newUser.save();
-        console.log("tryadfadf")
         done(null, newUser);
       } catch (err) {
         return done(err);

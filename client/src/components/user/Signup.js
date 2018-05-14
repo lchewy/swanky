@@ -9,9 +9,14 @@ import { withRouter } from "react-router-dom";
 import * as actions from "../../actions";
 
 class Signup extends Component {
-  componentDidMount() {}
+  componentDidMount() {
+    const {fetchToken} = this.props;
+    fetchToken();
+  }
 
   renderFields() {
+    // console.log("PROPS HERERER",this.props)
+    const {token:{messages}} = this.props
     return _.map(formFields, ({ label, name, type }) => {
       return (
         <Field
@@ -20,12 +25,14 @@ class Signup extends Component {
           label={label}
           name={name}
           component={SignupFields}
+          YOLO={messages || ""}
         />
       );
     });
   }
   render() {
     const { closeModal, handleSubmit, val, history, submitSignup } = this.props;
+    console.log(this.props)
     return (
       <Modal>
         <div className="modal">
@@ -45,13 +52,16 @@ class Signup extends Component {
   }
 }
 
-const mstp = ({ form }) => {
-  return { val: form.signUpForm };
+const mstp = ({ form, token }) => {
+  return { val: form.signUpForm, token };
 };
 
-const validate = () => {
-  const errors = {};
+// if validate email has no errors AND form is touched/dirty/submitted?? 
 
+const validate = values => {
+  console.log("VALUES, ", values)
+  const errors = {};
+  if(!values.email) errors.email = "need email!!!!"
   return errors;
 };
 
