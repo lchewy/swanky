@@ -9,6 +9,8 @@ import { withRouter } from "react-router-dom";
 import * as actions from "../../actions";
 
 class Signup extends Component {
+  componentDidMount() {}
+
   renderFields() {
     return _.map(formFields, ({ label, name, type }) => {
       return (
@@ -23,16 +25,19 @@ class Signup extends Component {
     });
   }
   render() {
-    console.log("PROPSSSSS", this.props);
-    const { closeModal, handleSubmit } = this.props;
+    const { closeModal, handleSubmit, val, history, submitSignup } = this.props;
     return (
       <Modal>
         <div className="modal">
           <button className="modal__closeBtn" onClick={closeModal}>
             &times;
           </button>
-          <form className="modal__form">{this.renderFields()}
-          <button type="submit">Submit</button>
+          <form
+            onSubmit={handleSubmit(() => submitSignup(val.values, history))}
+            className="modal__form"
+          >
+            {this.renderFields()}
+            <button type="submit">Submit</button>
           </form>
         </div>
       </Modal>
@@ -41,32 +46,15 @@ class Signup extends Component {
 }
 
 const mstp = ({ form }) => {
-  return { formValues: form.signUpForm  };
+  return { val: form.signUpForm };
+};
+
+const validate = () => {
+  const errors = {};
+
+  return errors;
 };
 
 export default connect(mstp, actions)(
-  reduxForm({ form: "signUpForm" })(withRouter(Signup))
+  reduxForm({ validate, form: "signUpForm" })(withRouter(Signup))
 );
-
-// <Modal>
-//   <button onClick={closeModal}>Close Modal</button>
-//   <form>
-//     <h1>Sign Up</h1>
-//     <label htmlFor="fname">
-//       <b>First Name</b>
-//     </label>
-//     <input name="fname" type="text" placeholder="Enter First Name" />
-//     <label htmlFor="lname">
-//       <b>Last Name</b>
-//     </label>
-//     <input name="lname" type="text" placeholder="Enter Last Name" />
-//     <label htmlFor="email">Email</label>
-//     <input name="email" type="text" placeholder="Enter Email" />
-//     <label htmlFor="pw">
-//       <b>PassWord</b>
-//     </label>
-//     <input type="password" placeholder="Enter Password" />
-
-//     <button type="submit">Submit</button>
-//   </form>
-// </Modal>

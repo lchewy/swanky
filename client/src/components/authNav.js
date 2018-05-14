@@ -19,9 +19,9 @@ export default [
         <Link className="user-nav__dropdown-content--link" to="/">
           Purchase History
         </Link>
-        <Link className="user-nav__dropdown-content--link" to="/">
+        <a className="user-nav__dropdown-content--link" href="/api/logout">
           Logout
-        </Link>
+        </a>
       </div>
     </div>
   </li>
