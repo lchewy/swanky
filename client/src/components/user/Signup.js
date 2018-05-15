@@ -7,16 +7,18 @@ import SignupFields from "./SignupFields";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import * as actions from "../../actions";
+import { validateEmails, validatePW } from "../utils/validate";
 
 class Signup extends Component {
   componentDidMount() {
-    const {fetchToken} = this.props;
+    const { fetchToken } = this.props;
     fetchToken();
   }
 
   renderFields() {
     // console.log("PROPS HERERER",this.props)
-    const {token:{messages}} = this.props
+    // const {token:{messages}} = this.props
+    // const {submitSucceeded} = this.props;
     return _.map(formFields, ({ label, name, type }) => {
       return (
         <Field
@@ -25,27 +27,27 @@ class Signup extends Component {
           label={label}
           name={name}
           component={SignupFields}
-          YOLO={messages || ""}
         />
       );
     });
   }
   render() {
     const { closeModal, handleSubmit, val, history, submitSignup } = this.props;
-    console.log(this.props)
     return (
       <Modal>
-        <div className="modal">
-          <button className="modal__closeBtn" onClick={closeModal}>
-            &times;
-          </button>
-          <form
-            onSubmit={handleSubmit(() => submitSignup(val.values, history))}
-            className="modal__form"
-          >
-            {this.renderFields()}
-            <button type="submit">Submit</button>
-          </form>
+        <div className="modal" >
+          <div className="modal__content">
+            <button className="modal__close" onClick={closeModal}>
+              &times;
+            </button>
+            <form
+              onSubmit={handleSubmit(() => submitSignup(val.values, history))}
+              className="modal__form"
+            >
+              {this.renderFields()}
+              <button type="submit">Submit</button>
+            </form>
+          </div>
         </div>
       </Modal>
     );
@@ -56,12 +58,12 @@ const mstp = ({ form, token }) => {
   return { val: form.signUpForm, token };
 };
 
-// if validate email has no errors AND form is touched/dirty/submitted?? 
-
 const validate = values => {
-  console.log("VALUES, ", values)
   const errors = {};
-  if(!values.email) errors.email = "need email!!!!"
+  errors.email = validateEmails(values.email || "");
+  errors.password = validatePW(values.password);
+  if (!values.fname) errors.fname = "Please enter your first name";
+  if (!values.lname) errors.lname = "Please enter your last name";
   return errors;
 };
 
