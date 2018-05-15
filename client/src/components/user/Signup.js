@@ -13,12 +13,19 @@ class Signup extends Component {
   componentDidMount() {
     const { fetchToken } = this.props;
     fetchToken();
+    document.addEventListener("mousedown", this.handleClick, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleClick, false);
+  }
+
+  handleClick(e) {
+    const outside = e.target.getAttribute("data-outside");
+      return outside === "modal_outside";
   }
 
   renderFields() {
-    // console.log("PROPS HERERER",this.props)
-    // const {token:{messages}} = this.props
-    // const {submitSucceeded} = this.props;
     return _.map(formFields, ({ label, name, type }) => {
       return (
         <Field
@@ -31,11 +38,20 @@ class Signup extends Component {
       );
     });
   }
+
   render() {
     const { closeModal, handleSubmit, val, history, submitSignup } = this.props;
     return (
       <Modal>
-        <div className="modal" >
+        <div
+          className="modal"
+          data-outside="modal_outside"
+          onClick={e => {
+            if (this.handleClick(e)) {
+              closeModal();
+            }
+          }}
+        >
           <div className="modal__content">
             <button className="modal__close" onClick={closeModal}>
               &times;
@@ -45,7 +61,7 @@ class Signup extends Component {
               className="modal__form"
             >
               {this.renderFields()}
-              <button type="submit">Submit</button>
+              <button type="submit">Submit too</button>
             </form>
           </div>
         </div>
