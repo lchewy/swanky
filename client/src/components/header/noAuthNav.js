@@ -1,5 +1,5 @@
 import React from "react";
-import Signup from "./user/Signup";
+import Signup from "../user/Signup";
 import { Link } from "react-router-dom";
 
 const noAuthNav = ({ openModal, closeModal, showModal }) => {
