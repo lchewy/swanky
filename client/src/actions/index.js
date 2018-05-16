@@ -1,5 +1,11 @@
 import axios from "axios";
-import { FETCH_USER, FETCH_TOKEN } from "./types";
+import {
+  FETCH_USER,
+  FETCH_TOKEN,
+  SHOW_MODAL,
+  SHOW_LOGIN,
+  SHOW_SIGNUP
+} from "./types";
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get("/api/current_user");
@@ -17,6 +23,23 @@ export const fetchToken = () => async dispatch => {
   dispatch({ type: FETCH_TOKEN, payload: res.data });
 };
 
+export const setModalState = bool => {
+  return {
+    type: SHOW_MODAL,
+    payload: bool
+  };
+};
 
+export const displaySignup = bool => {
+  return {
+    type: SHOW_SIGNUP,
+    payload: bool
+  };
+};
 
-
+export const displayLogin = bool => {
+  return {
+    type: SHOW_LOGIN,
+    payload: bool
+  };
+};

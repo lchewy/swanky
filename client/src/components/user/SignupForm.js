@@ -38,20 +38,18 @@ class SignupForm extends Component {
 }
 
 const mstp = ({ form, token }) => {
-    return { val: form.signUpForm, token };
-  };
-  
-  const validate = values => {
-    const errors = {};
-    errors.email = validateEmails(values.email || "");
-    errors.password = validatePW(values.password);
-    if (!values.fname) errors.fname = "Please enter your first name";
-    if (!values.lname) errors.lname = "Please enter your last name";
-    return errors;
-  };
+  return { val: form.signUpForm, token };
+};
+
+const validate = values => {
+  const errors = {};
+  errors.email = validateEmails(values.email || "");
+  errors.password = validatePW(values.password);
+  if (!values.fname) errors.fname = "Please enter your first name";
+  if (!values.lname) errors.lname = "Please enter your last name";
+  return errors;
+};
 
 export default connect(mstp, actions)(
-    reduxForm({ validate, form: "signUpForm" })(withRouter(SignupForm))
-  );
-
-// submitSignup(val.values, history)
+  reduxForm({ validate, form: "signUpForm" })(withRouter(SignupForm))
+);
