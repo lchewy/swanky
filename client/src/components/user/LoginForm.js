@@ -54,7 +54,7 @@ class LoginForm extends Component {
             displaySignup(true)
           }} 
           style={{ cursor: "pointer" }}>
-            <b>Sign up</b>
+            <strong>Sign up</strong>
           </span>
         </p>
       </form>

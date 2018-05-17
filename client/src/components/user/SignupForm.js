@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { reduxForm, Field } from "redux-form";
+import { reduxForm, Field, SubmissionError } from "redux-form";
 import _ from "lodash";
 import formFields from "./formFields";
 import SignupFields from "./SignupFields";
@@ -9,6 +9,9 @@ import { validateEmails, validatePW } from "../utils/validate";
 import { connect } from "react-redux";
 
 class SignupForm extends Component {
+  componentDidMount(){
+    this.props.fetchToken()
+  }
   renderFields() {
     return _.map(formFields, ({ label, name, type }) => {
       return (
@@ -23,6 +26,15 @@ class SignupForm extends Component {
     });
   }
 
+  submitFail() {
+    const { token:{messages}, fetchToken } = this.props;
+    console.log("token ", messages)
+    if (messages.length > 0) {
+      throw new SubmissionError({ email: "User already exists" });
+    }
+    return;
+  }
+
   render() {
     const {
       handleSubmit,
@@ -30,11 +42,12 @@ class SignupForm extends Component {
       val,
       history,
       displayLogin,
-      displaySignup
+      displaySignup,
     } = this.props;
+    console.log("PROPSS ", this.props);
     return (
       <form
-        onSubmit={handleSubmit(() => submitSignup(val.values, history))}
+        onSubmit={handleSubmit(() => {submitSignup(val.values, history); this.submitFail()})}
         className="modal__form"
       >
         {this.renderFields()}
@@ -48,7 +61,7 @@ class SignupForm extends Component {
             }}
             style={{ cursor: "pointer" }}
           >
-            <b>Log in</b>
+            <strong>Log in</strong>
           </span>
         </p>
       </form>

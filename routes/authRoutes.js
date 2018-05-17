@@ -31,11 +31,11 @@ module.exports = app => {
   });
 
   app.get("/api/signup", csrfProtection, (req, res) => {
-    // const messages = req.flash("error");
-    // console.log("server ", messages)
+    const messages = req.flash("error");
+    // console.log("hey whoa, what abou me")
     res.send({
-      csrfToken: req.csrfToken()
-      // messages
+      csrfToken: req.csrfToken(),
+      messages
     });
   });
 
@@ -46,9 +46,11 @@ module.exports = app => {
     }),
     (req, res) => {
       // console.log("server ", req.authInfo);
-      //   const messages = req.flash("error");
+        const messages = req.flash("error");
       // req.user.message = messages[0]
       // console.log("server ", req.user)
+      // console.log("I'm freaking heree~!!!", messages)
+
       res.send(req.user);
     }
   );

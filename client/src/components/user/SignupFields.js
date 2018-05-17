@@ -1,14 +1,15 @@
 import React from "react";
 
-export default ({ input, label, type, meta: { error, touched } }) => {
+export default values => {
+  // { input, label, type, meta: { error, touched } }
+  // console.log("fields ", values);
   return (
     <div>
-      <label>{label}</label>
-      <input {...input} type={type} required style={{ marginBottom: "5px" }} />
+      <label>{values.label}</label>
+      <input {...values.input} type={values.type} required style={{ marginBottom: "5px" }} />
       <div className="red-text" style={{ marginBottom: "20px" }}>
-        {touched && error}
+        {values.meta.touched && values.meta.error}
       </div>
     </div>
   );
 };
-
