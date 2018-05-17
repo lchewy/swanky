@@ -1,7 +1,10 @@
 const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
+const FacebookStrategy = require("passport-facebook").Strategy;
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const mongoose = require("mongoose");
 const User = mongoose.model("user");
+const keys = require("../config/keys");
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -25,7 +28,7 @@ passport.use(
       try {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
-          return done(null, false, {message: "email is already in use"});
+          return done(null, false, { message: "email is already in use" });
         }
       } catch (err) {
         return done(err);
@@ -70,6 +73,47 @@ passport.use(
         return done(null, foundUser);
       } catch (err) {
         return done(err);
+      }
+    }
+  )
+);
+
+passport.use(
+  new FacebookStrategy(
+    {
+      clientID: keys.facebookClientID,
+      clientSecret: keys.facebookClientSecret,
+      callbackURL: "/api/auth/facebook/callback",
+      proxy: true
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      const existingUser = await User.findOne({ facebookId: profile.id });
+      if (existingUser) {
+        done(null, existingUser);
+      } else {
+        const newUser = await new User({ facebookId: profile.id }).save();
+        done(null, newUser);
+      }
+    }
+  )
+);
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: keys.googleClientID,
+      clientSecret: keys.googleClientSecret,
+      callbackURL: "/api/auth/google/callback",
+      proxy: true
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      const existingUser = await User.findOne({ googleId: profile.id });
+
+      if (existingUser) {
+        done(null, existingUser); 
+      } else {
+        const user = await new User({ googleId: profile.id }).save();
+        done(null, user); 
       }
     }
   )

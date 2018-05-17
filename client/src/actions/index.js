@@ -18,6 +18,13 @@ export const submitSignup = (values, history) => async dispatch => {
   dispatch({ type: FETCH_USER, payload: res.data });
 };
 
+export const submitLogin = (values, history) => async dispatch => {
+  const res = await axios.post("/api/signin", values);
+  //history.location.pathname
+  history.push("/");
+  dispatch({ type: FETCH_USER, payload: res.data });
+};
+
 export const fetchToken = () => async dispatch => {
   const res = await axios.get("/api/signup");
   dispatch({ type: FETCH_TOKEN, payload: res.data });

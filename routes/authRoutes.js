@@ -34,7 +34,7 @@ module.exports = app => {
     // const messages = req.flash("error");
     // console.log("server ", messages)
     res.send({
-      csrfToken: req.csrfToken(),
+      csrfToken: req.csrfToken()
       // messages
     });
   });
@@ -46,17 +46,17 @@ module.exports = app => {
     }),
     (req, res) => {
       // console.log("server ", req.authInfo);
-    //   const messages = req.flash("error");
-    // req.user.message = messages[0]
-    // console.log("server ", req.user)
-      res.send(req.user); 
+      //   const messages = req.flash("error");
+      // req.user.message = messages[0]
+      // console.log("server ", req.user)
+      res.send(req.user);
     }
   );
 
   app.get("/api/signin", csrfProtection, (req, res) => {
     // const messages = req.flash("error");
     res.send({
-      csrfToken: req.csrfToken(),
+      csrfToken: req.csrfToken()
       // messages
     });
   });
@@ -72,8 +72,38 @@ module.exports = app => {
     }
   );
 
+  app.get(
+    "/api/auth/facebook",
+    passport.authenticate("facebook", {
+      scope: ["email"]
+    })
+  );
+
+  app.get(
+    "/api/auth/facebook/callback",
+    passport.authenticate("facebook"),
+    (req, res) => {
+      res.redirect("/");
+      // res.send("i'm working here!");
+    }
+  );
+
+  app.get(
+    "/api/auth/google",
+    passport.authenticate("google", {
+      scope: ["profile", "email"]
+    })
+  );
+
+  app.get(
+    "/api/auth/google/callback",
+    passport.authenticate("google"),
+    (req, res) => {
+      res.redirect("/");
+    }
+  );
+
   app.get("/api/current_user", (req, res) => {
     res.send(req.user);
   });
-
 };

@@ -24,7 +24,14 @@ class SignupForm extends Component {
   }
 
   render() {
-    const { handleSubmit, submitSignup, val, history } = this.props;
+    const {
+      handleSubmit,
+      submitSignup,
+      val,
+      history,
+      displayLogin,
+      displaySignup
+    } = this.props;
     return (
       <form
         onSubmit={handleSubmit(() => submitSignup(val.values, history))}
@@ -32,6 +39,18 @@ class SignupForm extends Component {
       >
         {this.renderFields()}
         <button type="submit">Submit</button>
+        <p>
+          Already have an account?{" "}
+          <span
+            onClick={() => {
+              displayLogin(true);
+              displaySignup(false);
+            }}
+            style={{ cursor: "pointer" }}
+          >
+            <b>Log in</b>
+          </span>
+        </p>
       </form>
     );
   }

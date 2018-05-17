@@ -3,10 +3,12 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-  fname: { type: String, required: true },
-  lname: { type: String, required: true },
-  email: { type: String, required: true },
-  password: { type: String, required: true }
+  fname: String,
+  lname: String,
+  email: String,
+  password: String,
+  facebookId: String,
+  googleId: String
 });
 
 userSchema.methods.encryptPassword = function(password) {
