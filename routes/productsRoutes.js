@@ -5,7 +5,7 @@ const Cart = require("../models/Cart");
 module.exports = app => {
   app.get("/api/products", async (req, res) => {
     const products = await Product.find().select({ reviews: false });
-    res.send({ products });
+    res.send( products );
   });
 
   app.get("/api/add-to-cart/:id", async (req, res) => {

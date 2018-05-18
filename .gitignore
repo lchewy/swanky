@@ -2,3 +2,4 @@ node_modules
 dev.js
 seed.js
 img
+.DS_Store

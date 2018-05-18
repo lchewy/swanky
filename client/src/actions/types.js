@@ -6,3 +6,4 @@ export const SHOW_SIGNUP = "SHOW_SIGNUP";
 export const SHOW_LOGIN = "SHOW_LOGIN"
 
 export const FETCH_EMAILS = "FETCH_EMAILS";
+export const FETCH_PRODUCTS = "FETCH_PRODUCTS";

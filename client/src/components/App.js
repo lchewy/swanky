@@ -1,20 +1,24 @@
 import React, { Component } from "react";
-import {BrowserRouter} from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import Header from "./header/Header";
-import * as actions from "../actions"
-import {connect} from "react-redux";
+import Dashboard from "./Dashboard";
+import * as actions from "../actions";
+import { connect } from "react-redux";
 
-class App extends Component{
-  componentDidMount(){
+class App extends Component {
+  componentDidMount() {
     this.props.fetchUser();
   }
 
-  render(){
-    return(
-    <BrowserRouter>
-      <Header/>
-    </BrowserRouter>
-    )
+  render() {
+    return (
+      <BrowserRouter>
+        <div>
+          <Header />
+          <Route path="/" exact component={Dashboard} />
+        </div>
+      </BrowserRouter>
+    );
   }
 }
 

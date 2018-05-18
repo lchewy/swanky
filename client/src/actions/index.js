@@ -5,7 +5,8 @@ import {
   SHOW_MODAL,
   SHOW_LOGIN,
   SHOW_SIGNUP,
-  FETCH_EMAILS
+  FETCH_EMAILS,
+  FETCH_PRODUCTS
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -55,4 +56,9 @@ export const displayLogin = bool => {
 export const fetchEmails = () => async dispatch => {
   const res = await axios.get("/api/users_emails");
   dispatch({ type: FETCH_EMAILS, payload: res.data });
+};
+
+export const fetchProducts = () => async dispatch => {
+  const res = await axios.get("/api/products");
+  dispatch({ type: FETCH_PRODUCTS, payload: res.data });
 };
