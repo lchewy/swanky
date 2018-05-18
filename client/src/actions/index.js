@@ -1,4 +1,3 @@
-import {SubmissionError} from "redux-form";
 import axios from "axios";
 import {
   FETCH_USER,

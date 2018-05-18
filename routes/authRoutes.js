@@ -32,7 +32,6 @@ module.exports = app => {
 
   app.get("/api/signup", csrfProtection, (req, res) => {
     const messages = req.flash("error");
-    // console.log("hey whoa, what abou me")
     res.send({
       csrfToken: req.csrfToken(),
       messages
@@ -46,11 +45,6 @@ module.exports = app => {
     }),
     (req, res) => {
       // console.log("server ", req.authInfo);
-        const messages = req.flash("error");
-      // req.user.message = messages[0]
-      // console.log("server ", req.user)
-      // console.log("I'm freaking heree~!!!", messages)
-
       res.send(req.user);
     }
   );
@@ -86,7 +80,6 @@ module.exports = app => {
     passport.authenticate("facebook"),
     (req, res) => {
       res.redirect("/");
-      // res.send("i'm working here!");
     }
   );
 

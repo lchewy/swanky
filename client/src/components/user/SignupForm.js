@@ -9,9 +9,10 @@ import { validateEmails, validatePW } from "../utils/validate";
 import { connect } from "react-redux";
 
 class SignupForm extends Component {
-  componentDidMount(){
-    this.props.fetchToken()
+  componentDidMount() {
+    this.props.fetchToken();
   }
+
   renderFields() {
     return _.map(formFields, ({ label, name, type }) => {
       return (
@@ -27,10 +28,13 @@ class SignupForm extends Component {
   }
 
   submitFail() {
-    const { token:{messages}, fetchToken } = this.props;
-    console.log("token ", messages)
-    if (messages.length > 0) {
-      throw new SubmissionError({ email: "User already exists" });
+    const {
+      // token: { messages }
+      auth
+    } = this.props;
+    console.log("token ", this.props);
+    if (!auth) {
+      throw new SubmissionError({ email: "Email already in use" });
     }
     return;
   }
@@ -39,15 +43,18 @@ class SignupForm extends Component {
     const {
       handleSubmit,
       submitSignup,
-      val,
+      // val,
       history,
       displayLogin,
-      displaySignup,
+      displaySignup
     } = this.props;
-    console.log("PROPSS ", this.props);
     return (
       <form
-        onSubmit={handleSubmit(() => {submitSignup(val.values, history); this.submitFail()})}
+        onSubmit={handleSubmit((values) => {
+          console.log("whaever ", values)
+          submitSignup(values, history);
+          this.submitFail();
+        })}
         className="modal__form"
       >
         {this.renderFields()}
@@ -69,8 +76,8 @@ class SignupForm extends Component {
   }
 }
 
-const mstp = ({ form, token }) => {
-  return { val: form.signUpForm, token };
+const mstp = ({ form, token, auth }) => {
+  return { val: form.signUpForm, token, auth };
 };
 
 const validate = values => {
