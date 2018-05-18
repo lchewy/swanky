@@ -4,7 +4,8 @@ import {
   FETCH_TOKEN,
   SHOW_MODAL,
   SHOW_LOGIN,
-  SHOW_SIGNUP
+  SHOW_SIGNUP,
+  FETCH_EMAILS
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -49,4 +50,9 @@ export const displayLogin = bool => {
     type: SHOW_LOGIN,
     payload: bool
   };
+};
+
+export const fetchEmails = () => async dispatch => {
+  const res = await axios.get("/api/users_emails");
+  dispatch({ type: FETCH_EMAILS, payload: res.data });
 };

@@ -28,7 +28,7 @@ passport.use(
       try {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
-          return done(null, false, { message: "email is already in use" });
+          return done(null, false);
         }
       } catch (err) {
         return done(err);

@@ -25,7 +25,6 @@ module.exports = app => {
   });
 
   app.get("/api/logout", (req, res) => {
-    // console.log("here i am")
     req.logout();
     res.redirect("/");
   });
@@ -50,10 +49,8 @@ module.exports = app => {
   );
 
   app.get("/api/signin", csrfProtection, (req, res) => {
-    // const messages = req.flash("error");
     res.send({
       csrfToken: req.csrfToken()
-      // messages
     });
   });
 
@@ -100,5 +97,11 @@ module.exports = app => {
 
   app.get("/api/current_user", (req, res) => {
     res.send(req.user);
+  });
+
+  app.get("/api/users_emails", async (req, res) => {
+    const users = await User.find();
+    const emails = users.map(user => user.email);
+    res.send(emails);
   });
 };

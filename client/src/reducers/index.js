@@ -4,11 +4,14 @@ import token from "./tokenReducer";
 import { showModal, showLogin, showSignup } from "./boolReducer";
 import { reducer as form } from "redux-form";
 
+import emails from "./emailReducer";
+
 export default combineReducers({
   auth,
   form,
   token,
   showModal,
   showLogin,
-  showSignup
+  showSignup,
+  emails
 });

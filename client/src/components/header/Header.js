@@ -8,7 +8,6 @@ import * as actions from "../../actions";
 class Header extends Component {
   renderUserNav() {
     const { auth, showModal, setModalState } = this.props;
-
     switch (auth) {
       case null:
         return;

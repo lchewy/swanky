@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 
 class SignupForm extends Component {
   componentDidMount() {
-    this.props.fetchToken();
+    this.props.fetchEmails();
   }
 
   renderFields() {
@@ -28,33 +28,18 @@ class SignupForm extends Component {
   }
 
   submitFail() {
-    const {
-      // token: { messages }
-      auth
-    } = this.props;
-    console.log("token ", this.props);
-    if (!auth) {
+    const { val, history, submitSignup, emails } = this.props;
+    submitSignup(val.values, history);
+    if (emails.includes(val.values.email)) {
       throw new SubmissionError({ email: "Email already in use" });
     }
-    return;
   }
 
   render() {
-    const {
-      handleSubmit,
-      submitSignup,
-      // val,
-      history,
-      displayLogin,
-      displaySignup
-    } = this.props;
+    const { handleSubmit, displayLogin, displaySignup } = this.props;
     return (
       <form
-        onSubmit={handleSubmit((values) => {
-          console.log("whaever ", values)
-          submitSignup(values, history);
-          this.submitFail();
-        })}
+        onSubmit={handleSubmit(() => this.submitFail())}
         className="modal__form"
       >
         {this.renderFields()}
@@ -76,8 +61,8 @@ class SignupForm extends Component {
   }
 }
 
-const mstp = ({ form, token, auth }) => {
-  return { val: form.signUpForm, token, auth };
+const mstp = ({ form, token, emails }) => {
+  return { val: form.signUpForm, token, emails };
 };
 
 const validate = values => {
