@@ -39,7 +39,7 @@ class Dashboard extends Component {
   render() {
     return (
       <section className="section-index">
-      <div className="landing" style={{margin:"30px 30px", textAlign:"center", fontSize:"40px"}}>LANDING PAGE IMAGE</div>
+      <div className="landing" style={{ textAlign:"center", fontSize:"40px"}}>LANDING PAGE IMAGE</div>
       <Sidebar />
       {this.renderCards()}
       </section>
