@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
+import _ from "lodash";
+import Sidebar from "./sidebar/Sidebar";
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -9,20 +11,26 @@ class Dashboard extends Component {
 
   renderCards() {
     const { products } = this.props;
-    return products.map(product => {
-      const { _id, title, price, imgUrl } = product;
+    return _.chunk(products, 3).map(chunk => {
       return (
-        <div className="col-1-of-4" key={_id}>
-          <div className="product">
-            <img
-              height="300px"
-              width="300px"
-              src={`./img/${imgUrl}`}
-              alt={`product-${_id}`}
-            />
-            <h5 className="product__title">{title}</h5>
-            <div className="product__price">${price}</div>
-          </div>
+        <div className="row">
+          {_.map(chunk, product => {
+            const { _id, title, price, imgUrl } = product;
+            return (
+              <div className="col-1-of-3" key={_id}>
+                <div className="product">
+                  <img
+                    height="300px"
+                    width="300px"
+                    src={`./img/${imgUrl}`}
+                    alt={`product-${_id}`}
+                  />
+                  <h5 className="product__title">{title}</h5>
+                  <div className="product__price">${price}</div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       );
     });
@@ -31,7 +39,9 @@ class Dashboard extends Component {
   render() {
     return (
       <section className="section-index">
-        <div className="row">{this.renderCards()}</div>
+      <div style={{margin:"30px 30px", textAlign:"center", fontSize:"40px"}}>LANDING PAGE IMAGE</div>
+      <Sidebar />
+      {this.renderCards()}
       </section>
     );
   }
