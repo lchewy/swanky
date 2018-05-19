@@ -11,9 +11,9 @@ class Dashboard extends Component {
 
   renderCards() {
     const { products } = this.props;
-    return _.chunk(products, 3).map(chunk => {
+    return _.chunk(products, 3).map((chunk,i) => {
       return (
-        <div className="row">
+        <div className="row" key={i}>
           {_.map(chunk, product => {
             const { _id, title, price, imgUrl } = product;
             return (
@@ -39,7 +39,7 @@ class Dashboard extends Component {
   render() {
     return (
       <section className="section-index">
-      <div style={{margin:"30px 30px", textAlign:"center", fontSize:"40px"}}>LANDING PAGE IMAGE</div>
+      <div className="landing" style={{margin:"30px 30px", textAlign:"center", fontSize:"40px"}}>LANDING PAGE IMAGE</div>
       <Sidebar />
       {this.renderCards()}
       </section>
