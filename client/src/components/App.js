@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import Header from "./header/Header";
 import Dashboard from "./Dashboard";
+import Product from "./Product";
 import * as actions from "../actions";
 import { connect } from "react-redux";
 
@@ -16,6 +17,7 @@ class App extends Component {
         <div>
           <Header />
           <Route path="/" exact component={Dashboard} />
+          <Route path="/product/:id" exact component={Product}/>
         </div>
       </BrowserRouter>
     );

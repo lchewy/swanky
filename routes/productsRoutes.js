@@ -54,5 +54,10 @@ module.exports = app => {
     });
   });
 
+  app.get("/api/product/:id", async (req, res)=>{
+    const id = req.params.id
+    const product = await Product.findById(id);
+    res.send(product);
+  })
   
 };

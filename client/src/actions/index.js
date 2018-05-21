@@ -6,7 +6,8 @@ import {
   SHOW_LOGIN,
   SHOW_SIGNUP,
   FETCH_EMAILS,
-  FETCH_PRODUCTS
+  FETCH_PRODUCTS,
+  FETCH_PRODUCT
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -61,4 +62,9 @@ export const fetchEmails = () => async dispatch => {
 export const fetchProducts = () => async dispatch => {
   const res = await axios.get("/api/products");
   dispatch({ type: FETCH_PRODUCTS, payload: res.data });
+};
+
+export const fetchProduct = id => async dispatch => {
+  const res = await axios.get(`/api/products/${id}`);
+  dispatch({ type: FETCH_PRODUCT, payload: res.data });
 };
