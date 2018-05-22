@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
 import { withRouter } from "react-router-dom";
-import formFields from "./formFields";
+import {formFields} from "./formFields";
 import _ from "lodash";
 import SignupFields from "./SignupFields";
 import { connect } from "react-redux";

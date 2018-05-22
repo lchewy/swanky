@@ -56,7 +56,6 @@ class Product extends Component {
         params: { id }
       }
     } = this.props;
-    console.log("url", this.props.product.imgUrl)
     return (
       <section>
         {this.renderProduct()}

@@ -1,67 +1,23 @@
 import React from "react";
 
-export default ({ input, label, type }) => {
+export default (values) => {
+  const{input, type } = values
   return (
-    <div>
-      <fieldset className="rate">
-        <input
-          className="rate__radio"
-          id="rate1-star5"
-          type="radio"
-          name="rate1"
-          value="5"
-        />
-        <label className="rate__label" htmlFor="rate1-star5" title="Excellent">
-          5
-        </label>
+    <div className="rate" >
+      <input className="rate__radioa" {...input} type={type} id="star5" value="5"/>
+      <label className="rate__label" htmlFor="star5"></label>
 
-        <input
-          className="rate__radio"
-          id="rate1-star4"
-          type="radio"
-          name="rate1"
-          value="4"
-        />
-        <label className="rate__label" htmlFor="rate1-star4" title="Good">
-          4
-        </label>
+      <input className="rate__radioa" {...input} type={type} id="star4" value="4"/>
+      <label className="rate__label" htmlFor="star4"></label>
 
-        <input
-          className="rate__radio"
-          id="rate1-star3"
-          type="radio"
-          name="rate1"
-          value="3"
-        />
-        <label className="rate__label" htmlFor="rate1-star3" title="Satisfactory">
-          3
-        </label>
+      <input className="rate__radioa" {...input} type={type} id="star3" value="3"/>
+      <label className="rate__label" htmlFor="star3"></label>
 
-        <input
-          className="rate__radio"
-          id="rate1-star2"
-          type="radio"
-          name="rate1"
-          value="2"
-        />
-        <label className="rate__label" htmlFor="rate1-star2" title="Bad">
-          2
-        </label>
+      <input className="rate__radioa" {...input} type={type} id="star2" value="2"/>
+      <label className="rate__label" htmlFor="star2"></label>
 
-        <input
-          className="rate__radio"
-          id="rate1-star1"
-          type="radio"
-          name="rate1"
-          value="1"
-        />
-        <label className="rate__label" htmlFor="rate1-star1" title="Very bad">
-          1
-        </label>
-      </fieldset>
-      <fieldset>
-        <input type={type} />
-      </fieldset>
+      <input className="rate__radioa" {...input} type={type} id="star1" value="1"/>
+      <label className="rate__label" htmlFor="star1"></label>
     </div>
   );
 };

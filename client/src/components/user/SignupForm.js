@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { reduxForm, Field, SubmissionError } from "redux-form";
 import _ from "lodash";
-import formFields from "./formFields";
+import {formFields} from "./formFields";
 import SignupFields from "./SignupFields";
 import { withRouter } from "react-router-dom";
 import * as actions from "../../actions";
@@ -28,7 +28,6 @@ class SignupForm extends Component {
   }
 
   submitFail() {
-    console.log("HERE I AM ", this.props)
     const { val, history, submitSignup, emails, location } = this.props;
     submitSignup(val.values, history, location);
     if (emails.includes(val.values.email)) {
