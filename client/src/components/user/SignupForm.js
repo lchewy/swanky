@@ -28,8 +28,9 @@ class SignupForm extends Component {
   }
 
   submitFail() {
-    const { val, history, submitSignup, emails } = this.props;
-    submitSignup(val.values, history);
+    console.log("HERE I AM ", this.props)
+    const { val, history, submitSignup, emails, location } = this.props;
+    submitSignup(val.values, history, location);
     if (emails.includes(val.values.email)) {
       throw new SubmissionError({ email: "Email already in use" });
     }

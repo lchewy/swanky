@@ -1,42 +1,39 @@
 @import url("//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css");
 
 .rate {
-    display: inline-block;
-    margin: 0;
-    padding: 0;
-    border: none;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  border: none;
+  &__radio {
+    display: none;
   }
-  
-//   input {
-//     display: none;
-//   }
-  
-  label {
+  &__label {
     float: right;
     font-size: 0;
     color: #d9d9d9;
   }
-  
-  label:before {
-    content: "\f005";
-    font-family: FontAwesome;
-    font-size: 20px;
-  }
-  
-  label:hover,
-  label:hover ~ label {
-    color: #fcd000;
-    transition: 0.2s;
-  }
-  
-  input:checked ~ label {
-    color: #ccac00;
-  }
-  
-  input:checked ~ label:hover,
-  input:checked ~ label:hover ~ label {
-    color: #fcd000;
-    transition: 0.2s;
-  }
-  
-  
+}
+
+
+.rate__label:before {
+  content: "\f005";
+  font-family: FontAwesome;
+  font-size: 20px;
+}
+
+.rate__label:hover,
+.rate__label:hover ~ .rate__label {
+  color: #fcd000;
+  transition: 0.2s;
+}
+
+input:checked ~ .rate__label {
+  color: #ccac00;
+}
+
+input:checked ~ .rate__label:hover,
+input:checked ~ .rate__label:hover ~ .rate__label {
+  color: #fcd000;
+  transition: 0.2s;
+}

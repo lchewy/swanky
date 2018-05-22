@@ -59,5 +59,9 @@ module.exports = app => {
     const product = await Product.findById(id);
     res.send(product);
   })
+
+  app.post("/api/review/:id", async (req,res)=>{
+    
+  })
   
 };
