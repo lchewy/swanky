@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
 import * as actions from "../actions";
-import ReviewFields from "./ReviewFields";
 
 class Reviews extends Component {
   renderFields() {
@@ -21,9 +20,9 @@ class Reviews extends Component {
             <label className="rate__label" htmlFor="rating2" />
             <Field className="rate__radio" id="rating1" name="rating" component="input" type="radio" value="1" />
             <label className="rate__label" htmlFor="rating1" />
+            </div>
             <Field type="text" component="textarea" name="summary" />
             <button type="submit">Submit</button>
-          </div>
         </form>
       );
     } else {
@@ -49,5 +48,3 @@ const mstp = ({ auth, product, form }) => ({
 export default connect(mstp, actions)(
   reduxForm({ form: "reviewForm" })(Reviews)
 );
-
-// <Field type="radio" component={ReviewFields} name="rating" value="me"/>
