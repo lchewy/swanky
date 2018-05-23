@@ -5,6 +5,14 @@ import * as actions from "../actions";
 import ReviewFields from "./ReviewFields";
 
 class Reviews extends Component {
+  componentDidMount() {
+    const {
+      match: {
+        params: { id }
+      }
+    } = this.props;
+    this.props.fetchProduct(id);
+  }
   renderReview() {
     const { handleSubmit, auth } = this.props;
     if (auth) {
@@ -26,23 +34,36 @@ class Reviews extends Component {
     const {
       submitReview,
       auth: { _id },
-      val:{values: {rating, summary}},
-      match: {params:{id}},
-      history,
-      location
+      val: {
+        values: { rating, summary }
+      },
+      match: {
+        params: { id }
+      },
+      history
     } = this.props;
-    submitReview(id, {user:_id, rating: rating, summary: summary }, history);
+    submitReview(id, { user: _id, rating: rating, summary: summary }, history);
   }
 
   render() {
-    // console.log("PROPS ", this.props)
-    return this.renderReview();
+    const { imgUrl } = this.props;
+    return (
+      <div>
+        <img
+          alt="product"
+          height="500px"
+          width="500px"
+          src={`../../img/${imgUrl}`}
+        />
+        {this.renderReview()}
+      </div>
+    );
   }
 }
 
-const mstp = ({ auth, product, form }) => ({
+const mstp = ({ auth, product: { imgUrl }, form }) => ({
   auth,
-  product,
+  imgUrl,
   val: form.reviewForm
 });
 
