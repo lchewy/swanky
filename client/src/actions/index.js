@@ -7,7 +7,8 @@ import {
   SHOW_SIGNUP,
   FETCH_EMAILS,
   FETCH_PRODUCTS,
-  FETCH_PRODUCT
+  FETCH_PRODUCT,
+  SUBMIT_REVIEW
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -67,3 +68,8 @@ export const fetchProduct = id => async dispatch => {
   const res = await axios.get(`/api/product/${id}`);
   dispatch({ type: FETCH_PRODUCT, payload: res.data });
 };
+
+export const submitReview = (id, body) => async dispatch =>{
+  const res = await axios.post(`/api/review/${id}`);
+  dispatch({type: SUBMIT_REVIEW, payload: res.data})
+}

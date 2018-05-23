@@ -5,7 +5,7 @@ const Cart = require("../models/Cart");
 module.exports = app => {
   app.get("/api/products", async (req, res) => {
     const products = await Product.find().select({ reviews: false });
-    res.send( products );
+    res.send(products);
   });
 
   app.get("/api/add-to-cart/:id", async (req, res) => {
@@ -54,14 +54,19 @@ module.exports = app => {
     });
   });
 
-  app.get("/api/product/:id", async (req, res)=>{
-    const id = req.params.id
+  app.get("/api/product/:id", async (req, res) => {
+    const id = req.params.id;
     const product = await Product.findById(id);
     res.send(product);
-  })
+  });
 
-  app.post("/api/review/:id", async (req,res)=>{
-    
-  })
-  
+  app.post("/api/review/:id", async (req, res) => {
+    const id = req.params.id;
+    // const {user, rating, summary} = req.body;
+    // const body = {_user: "5b056d07b0db397035ec45bf", rating: 3, summary: "surprise this is okay", dateReviewed: new Date()}
+    const product = await Product.findByIdAndUpdate(id, {$push: {reviews: body }});
+    await product.save();
+    const review = await Product.findById(id);
+    res.send(review);
+  });
 };

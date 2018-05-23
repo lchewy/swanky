@@ -13,7 +13,7 @@ class Reviews extends Component {
           <div className="rate">
             <ReviewFields />
           </div>
-          <Field type="text" component="textarea" name="summary" />
+          <Field type="text" component="textarea" name="summary"/>
           <button type="submit">Submit</button>
         </form>
       );
@@ -22,11 +22,14 @@ class Reviews extends Component {
     }
   }
 
-  submitReview(e) {
-    console.log("hi!!", this.props.val);
+  submitReview() {
+    const {submitReview, auth:{_id, fname, lname}, val} = this.props;
+    submitReview({_id, username: `${fname} ${lname}`, summary: val.summary, rating: val.rating})
+
   }
 
   render() {
+    console.log("PROPS ",this.props)
     return this.renderReview();
   }
 }
