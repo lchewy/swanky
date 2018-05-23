@@ -1,25 +1,21 @@
 import React from "react";
+import { Field } from "redux-form";
 
-export default (values) => {
-  const{input, type} = values
-  console.log("VAL ",values)
+export default () =>{
   return (
-    <div className="rate" >
-      
-      <input className="rate__radioa" {...input} type={type} id="star5" value={5}/>
-      <label className="rate__label" htmlFor="star5"/>
-
-      <input className="rate__radioa" {...input} type={type} id="star4" value={4}/>
-      <label className="rate__label" htmlFor="star4"></label>
-
-      <input className="rate__radioa" {...input} type={type} id="star3" value={3}/>
-      <label className="rate__label" htmlFor="star3"></label>
-
-      <input className="rate__radioa" {...input} type={type} id="star2" value={2}/>
-      <label className="rate__label" htmlFor="star2"></label>
-
-      <input className="rate__radioa" {...input} type={type} id="star1" value={1}/>
-      <label className="rate__label" htmlFor="star1"></label>
+    <div className="rate">
+      <Field className="rate__radio" id="rating5" name="rating" component="input" type="radio" value="5"/>
+      <label className="rate__label" htmlFor="rating5" />
+      <Field className="rate__radio" id="rating4" name="rating" component="input" type="radio" value="4" />
+      <label className="rate__label" htmlFor="rating4" />
+      <Field className="rate__radio" id="rating3" name="rating" component="input" type="radio" value="3" />
+      <label className="rate__label" htmlFor="rating3" />
+      <Field className="rate__radio" id="rating2" name="rating" component="input" type="radio" value="2" />
+      <label className="rate__label" htmlFor="rating2" />
+      <Field className="rate__radio" id="rating1" name="rating" component="input" type="radio" value="1" />
+      <label className="rate__label" htmlFor="rating1" />
     </div>
-  );
-};
+  )
+}
+
+
