@@ -69,7 +69,8 @@ export const fetchProduct = id => async dispatch => {
   dispatch({ type: FETCH_PRODUCT, payload: res.data });
 };
 
-export const submitReview = (id, body) => async dispatch =>{
-  const res = await axios.post(`/api/review/${id}`);
-  dispatch({type: SUBMIT_REVIEW, payload: res.data})
-}
+export const submitReview = (id, values, history) => async dispatch => {
+  const res = await axios.post(`/api/review/${id}`, values);
+  history.push(`/product/${id}`);
+  dispatch({ type: SUBMIT_REVIEW, payload: res.data });
+};

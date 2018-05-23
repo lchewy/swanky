@@ -56,14 +56,14 @@ module.exports = app => {
 
   app.get("/api/product/:id", async (req, res) => {
     const id = req.params.id;
-    const product = await Product.findById(id);
+    const product = await Product.findById(id).populate("reviews._user", ["fname", "lname"])
     res.send(product);
   });
 
   app.post("/api/review/:id", async (req, res) => {
     const id = req.params.id;
-    // const {user, rating, summary} = req.body;
-    // const body = {_user: "5b056d07b0db397035ec45bf", rating: 3, summary: "surprise this is okay", dateReviewed: new Date()}
+    const {user, rating, summary} = req.body;
+    const body = {_user: user, rating, summary, dateReviewed: new Date() }
     const product = await Product.findByIdAndUpdate(id, {$push: {reviews: body }});
     await product.save();
     const review = await Product.findById(id);
