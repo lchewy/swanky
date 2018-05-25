@@ -2,7 +2,8 @@ import {
   FETCH_PRODUCTS,
   FETCH_PRODUCT,
   SUBMIT_REVIEW,
-  ADD_TO_CART
+  ADD_TO_CART,
+  FETCH_CART
 } from "../actions/types";
 
 export const products = (state = [], action) => {
@@ -25,8 +26,19 @@ export const product = (state = {}, action) => {
   }
 };
 
-export const totalQty = (state = 0, action) => {
+// export const totalQty = (state = 0, action) => {
+//   switch (action.type) {
+//     case ADD_TO_CART:
+//       return action.payload.totalQty;
+//     default:
+//       return state;
+//   }
+// };
+
+export const cart = (state = {}, action) => {
   switch (action.type) {
+    case FETCH_CART:
+      return action.payload;
     case ADD_TO_CART:
       return action.payload.totalQty;
     default:

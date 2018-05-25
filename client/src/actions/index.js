@@ -9,7 +9,8 @@ import {
   FETCH_PRODUCTS,
   FETCH_PRODUCT,
   SUBMIT_REVIEW,
-  ADD_TO_CART
+  ADD_TO_CART,
+  FETCH_CART
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -76,7 +77,12 @@ export const submitReview = (id, values, history) => async dispatch => {
   dispatch({ type: SUBMIT_REVIEW, payload: res.data });
 };
 
-export const addToCart = id => async dispatch =>{
+export const addToCart = id => async dispatch => {
   const res = await axios.get(`/api/add-to-cart/${id}`);
-  dispatch({type: ADD_TO_CART, payload: res.data});
-}
+  dispatch({ type: FETCH_CART, payload: res.data });
+};
+
+export const fetchCart = () => async dispatch => {
+  const res = await axios.get("/api/shopping-cart");
+  dispatch({type: FETCH_CART, payload: res.data});
+};

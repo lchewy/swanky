@@ -25,6 +25,7 @@ class Header extends Component {
   }
 
   render() {
+    const {cart:{totalQty}} = this.props;
     return (
       <header className="header">
         <Link className="logo" to="/">
@@ -43,6 +44,7 @@ class Header extends Component {
         <nav className="user-nav">
           <Link to="/shopping-cart" className="user-nav__icon-box">
             <i className="fas fa-shopping-cart" />
+            {totalQty && <span>{totalQty}</span>}
           </Link>
           <ul>{this.renderUserNav()}</ul>
         </nav>
@@ -50,8 +52,8 @@ class Header extends Component {
     );
   }
 }
-const mstp = ({ auth, showModal }) => {
-  return { auth, showModal };
+const mstp = ({ auth, showModal, cart }) => {
+  return { auth, showModal, cart };
 };
 
 export default connect(mstp, actions)(Header);

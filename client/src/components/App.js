@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();
+    this.props.fetchCart();
   }
 
   render() {

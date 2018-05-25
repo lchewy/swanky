@@ -16,7 +16,6 @@ module.exports = app => {
       const item = await Product.findById(id).select({reviews:false, imgUrl:false, category: false, description: false});
       cart.add(item, id);
       req.session.cart = cart;
-      // res.redirect("/");
       res.send(cart);
     } catch (err) {
       res.status(404).send({
@@ -51,7 +50,8 @@ module.exports = app => {
     const cart = new Cart(req.session.cart);
     res.send({
       products: cart.generateArray(),
-      totalPrice: cart.totalPrice
+      totalPrice: cart.totalPrice,
+      totalQty: cart.totalQty
     });
   });
 
