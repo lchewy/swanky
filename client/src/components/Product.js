@@ -15,7 +15,7 @@ class Product extends Component {
   }
 
   renderProduct() {
-    const { title, description, price, imgUrl } = this.props.product;
+    const { product:{title, description, price, imgUrl}, match: {params:{id}} } = this.props;
     return (
       <div className="row">
         <div className="col-1-of-2">
@@ -32,6 +32,8 @@ class Product extends Component {
           <hr />
           <h4>Description</h4>
           <p>{description}</p>
+          <hr/>
+          <button>Add to Cart</button>
         </div>
       </div>
     );

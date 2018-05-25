@@ -38,3 +38,5 @@ class Cart {
       return Object.values(this.cartItems);
   }
 }
+
+module.exports = Cart;

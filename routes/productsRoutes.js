@@ -13,10 +13,11 @@ module.exports = app => {
     const cart = new Cart(req.session.cart ? req.session.cart : {});
 
     try {
-      const item = await Product.findById(id);
+      const item = await Product.findById(id).select({reviews:false, imgUrl:false, category: false, description: false});
       cart.add(item, id);
       req.session.cart = cart;
-      res.redirect("/");
+      // res.redirect("/");
+      res.send(cart);
     } catch (err) {
       res.status(404).send({
         error: "sorry something occured, please try again in a few minutes"

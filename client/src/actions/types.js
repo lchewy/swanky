@@ -1,12 +1,10 @@
 export const FETCH_USER = "FETCH_USER";
 export const FETCH_TOKEN = "FETCH_TOKEN";
-
 export const SHOW_MODAL = "SHOW_MODAL";
 export const SHOW_SIGNUP = "SHOW_SIGNUP";
-export const SHOW_LOGIN = "SHOW_LOGIN"
-
+export const SHOW_LOGIN = "SHOW_LOGIN";
 export const FETCH_EMAILS = "FETCH_EMAILS";
 export const FETCH_PRODUCTS = "FETCH_PRODUCTS";
-
-export const FETCH_PRODUCT= "FETCH_PRODUCT";
+export const FETCH_PRODUCT = "FETCH_PRODUCT";
 export const SUBMIT_REVIEW = "SUBMIT_REVIEW";
+export const ADD_TO_CART = "ADD_TO_CART";

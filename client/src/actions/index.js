@@ -8,7 +8,8 @@ import {
   FETCH_EMAILS,
   FETCH_PRODUCTS,
   FETCH_PRODUCT,
-  SUBMIT_REVIEW
+  SUBMIT_REVIEW,
+  ADD_TO_CART
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -74,3 +75,8 @@ export const submitReview = (id, values, history) => async dispatch => {
   history.push(`/product/${id}`);
   dispatch({ type: SUBMIT_REVIEW, payload: res.data });
 };
+
+export const addToCart = id => async dispatch =>{
+  const res = await axios.get(`/api/add-to-cart/${id}`);
+  dispatch({type: ADD_TO_CART, payload: res.data});
+}
