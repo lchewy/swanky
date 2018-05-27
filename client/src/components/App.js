@@ -4,6 +4,7 @@ import Header from "./header/Header";
 import Dashboard from "./Dashboard";
 import Product from "./Product";
 import Reviews from "./Reviews";
+import ShoppingCart from "./shop/ShoppingCart";
 import * as actions from "../actions";
 import { connect } from "react-redux";
 
@@ -21,6 +22,7 @@ class App extends Component {
           <Route path="/" exact component={Dashboard} />
           <Route path="/product/:id" exact component={Product} />
           <Route path="/product/reviews/:id" exact component={Reviews} />
+          <Route path="/shopping-cart" exact component={ShoppingCart} />
         </div>
       </BrowserRouter>
     );
