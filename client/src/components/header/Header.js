@@ -25,7 +25,9 @@ class Header extends Component {
   }
 
   render() {
-    const {cart:{totalQty}} = this.props;
+    const {
+      cart: { totalQty }
+    } = this.props;
     return (
       <header className="header">
         <Link className="logo" to="/">
@@ -44,7 +46,7 @@ class Header extends Component {
         <nav className="user-nav">
           <Link to="/shopping-cart" className="user-nav__icon-box">
             <i className="fas fa-shopping-cart" />
-            {totalQty && <span>{totalQty}</span>}
+            {totalQty === 0 ? <div /> : <span>{totalQty}</span>}
           </Link>
           <ul>{this.renderUserNav()}</ul>
         </nav>
