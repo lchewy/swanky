@@ -33,10 +33,11 @@ class LoginForm extends Component {
       val,
       history,
       displayLogin,
-      displaySignup
+      displaySignup,
+      location
     } = this.props;
     return (
-      <form onSubmit={handleSubmit(() => submitLogin(val.values, history))}>
+      <form onSubmit={handleSubmit(() => submitLogin(val.values, history, location))}>
         <button>
           <a href="/api/auth/facebook">Continue with Facebook</a>
         </button>

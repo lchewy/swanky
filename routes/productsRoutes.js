@@ -44,7 +44,7 @@ module.exports = app => {
 
   app.get("/api/shopping-cart", (req, res) => {
     if (!req.session.cart) {
-      res.send({});
+      return res.send({});
     }
 
     const cart = new Cart(req.session.cart);
