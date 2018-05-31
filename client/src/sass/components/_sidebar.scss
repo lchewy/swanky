@@ -9,10 +9,14 @@
     background: #eee;
     overflow-x: hidden;
     padding: 8px 0;
+    
+    &__text{
+        position: fixed;
+    }
 }
 
 .index{
     position: relative;
-    // left: 90px;
+    left: 90px;
 
 }
